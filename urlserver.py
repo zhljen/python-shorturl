@@ -1,4 +1,5 @@
 import vertx
+from shorturl import ShortenURL
 
 server = vertx.create_http_server()
 
@@ -7,9 +8,7 @@ def request_handler(request):
     print request.method
     print request.uri
     if ( request.method == 'GET' ):
-        file = 'index.html'
-    elif '..' not in request.path:
-        file = request.path
-    request.response.send_file(file) 
+        short_url = ShortenURL().shorten(request.uri)
+    request.response.end(short_url)
       
 server.listen(8080)

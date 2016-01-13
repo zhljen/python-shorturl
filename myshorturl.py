@@ -3,6 +3,14 @@ import redis
 
 REDIS_HOSTNAME = 'localhost'
 ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+BASE = len(ALPHABET)
+
+class store(object):
+    def __init__(self):
+        self.domain = 'http://myshorten/'
+        self.redis_server = redis.Redis(REDIS_HOSTNAME)
+        self.redis_server.set('hit_counter', 0)
+
 
 class ShortenURL(object):
     """
